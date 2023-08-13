@@ -12,7 +12,7 @@ let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
 
-	let disposable = commands.registerCommand('ki-vscode.helloWorld', () => {
+	let disposable = commands.registerCommand('ki-vscode.activate', () => {
 		window.showInformationMessage('Starting language server');
 	});
 

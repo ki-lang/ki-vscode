@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "ki-vscode.helloWorld",
-        "title": "Hello World"
+        "command": "ki-vscode.activate",
+        "title": "Ki extension activate"
       }
     ]
   },
