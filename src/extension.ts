@@ -1,5 +1,7 @@
 
-import { workspace, ExtensionContext, window, commands } from 'vscode';
+import * as vs from 'vscode';
+import * as lsp from 'vscode-languageserver-protocol';
+import * as lc from 'vscode-languageclient';
 
 import {
 	LanguageClient,
@@ -10,14 +12,10 @@ import {
 
 let client: LanguageClient;
 
-export function activate(context: ExtensionContext) {
+export function activate(context: vs.ExtensionContext) {
 
-	let disposable = commands.registerCommand('ki-vscode.activate', () => {
-		window.showInformationMessage('Starting language server');
-	});
+	let outputChannel = vs.window.createOutputChannel("Ki Language Server");
 
-	// If the extension is launched in debug mode then the debug server options are used
-	// Otherwise the run options are used
 	const cmd = "ki";
 	const serverOptions: ServerOptions = {
 		run: {
@@ -32,17 +30,12 @@ export function activate(context: ExtensionContext) {
 		}
 	};
 
-	// Options to control the language client
 	const clientOptions: LanguageClientOptions = {
-		// Register the server for plain text documents
 		documentSelector: [{ scheme: 'file', language: 'ki' }],
-		synchronize: {
-			// Notify the server about file changes to '.clientrc files contained in the workspace
-			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-		}
+		outputChannel: outputChannel,
+		traceOutputChannel: outputChannel
 	};
 
-	// Create the language client and start the client.
 	client = new LanguageClient(
 		'kiLanguageServer',
 		'Ki Language Server',
@@ -50,8 +43,31 @@ export function activate(context: ExtensionContext) {
 		clientOptions
 	);
 
-	// Start the client. This will also launch the server
 	client.start();
+
+	// context.subscriptions.push(vs.languages.registerDefinitionProvider({ scheme: "file", language: "ki", pattern: "**/*.{ki,kh}" }, {
+	// 	provideDefinition(document, position, token): vs.ProviderResult<vs.Definition> {
+	// 		vs.window.showInformationMessage(
+	// 			`File: ${document.uri.path}; Line: ${position.line}; Character: ${position.character}`
+	// 		);
+	// 		return client.sendRequest("textDocument/definition", {
+	// 			textDocument: document,
+	// 			position: position,
+	// 		}, token);
+	// 	}
+	// }));
+
+	// context.subscriptions.push(vs.languages.registerHoverProvider({ scheme: "file", language: "ki", pattern: "**/*.{ki,kh}" }, {
+	// 	provideHover(document, position, token): vs.ProviderResult<vs.Hover> {
+	// 		vs.window.showInformationMessage(
+	// 			`File: ${document.uri.path}; Line: ${position.line}; Character: ${position.character}`
+	// 		);
+	// 		return client.sendRequest("textDocument/hover", {
+	// 			textDocument: document,
+	// 			position: position,
+	// 		}, token);
+	// 	}
+	// }));
 }
 
 export function deactivate(): Thenable<void> | undefined {

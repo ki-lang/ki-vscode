@@ -46,7 +46,7 @@
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b(while|if|else|let)\\b",
+                    "match": "\\b(while|if|else|let|rep|return)\\b",
                     "name": "keyword.token.ki"
                 },
                 {

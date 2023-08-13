@@ -19,13 +19,7 @@
                 "title": "Ki extension activate"
             }
         ],
-        "configurationDefaults": {
-            "[ki]": {
-                "editor.formatOnSave": true,
-                "editor.defaultFormatter": "ki-lang.ki-vscode",
-                "files.eol": "\n"
-            }
-        },
+        "configurationDefaults": {},
         "languages": [
             {
                 "id": "ki",
@@ -51,6 +45,17 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Compiles code on file save using the settings specified in 'Build Option'."
+                },
+                "kiLanguageServer.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the language server."
                 }
             }
         }
