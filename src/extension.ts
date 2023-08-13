@@ -23,12 +23,12 @@ export function activate(context: ExtensionContext) {
 		run: {
 			command: cmd,
 			transport: TransportKind.stdio,
-			args: ['lsp', 'start']
+			args: ['ls', 'start']
 		},
 		debug: {
 			command: cmd,
 			transport: TransportKind.stdio,
-			args: ['lsp', 'start']
+			args: ['ls', 'start']
 		}
 	};
 
