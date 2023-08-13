@@ -47,7 +47,7 @@
             "type": "object",
             "title": "Ki",
             "properties": {
-                "zig.buildOnSave": {
+                "ki.buildOnSave": {
                     "type": "boolean",
                     "default": false,
                     "description": "Compiles code on file save using the settings specified in 'Build Option'."
