@@ -36,6 +36,13 @@
                 "configuration": "./language-config.json"
             }
         ],
+        "grammars": [
+            {
+                "language": "ki",
+                "scopeName": "source.ki",
+                "path": "./syntax/ki.json"
+            }
+        ],
         "configuration": {
             "type": "object",
             "title": "Ki",
