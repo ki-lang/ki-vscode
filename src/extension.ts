@@ -1,5 +1,5 @@
 
-import { workspace, ExtensionContext } from 'vscode';
+import { workspace, ExtensionContext, window, commands } from 'vscode';
 
 import {
 	LanguageClient,
@@ -11,6 +11,10 @@ import {
 let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
+
+	let disposable = commands.registerCommand('ki-vscode.helloWorld', () => {
+		window.showInformationMessage('Starting language server');
+	});
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
