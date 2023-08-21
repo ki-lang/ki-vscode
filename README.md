@@ -7,7 +7,7 @@ Provides support for `ki` lang in vscode
 
 ```
 - Syntax highlighting
-- Auto completion
+- Code completion
 - Goto definition
 - Error checking
 - Function argument hints
