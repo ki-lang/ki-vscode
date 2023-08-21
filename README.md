@@ -1,4 +1,14 @@
 
-# Ki vscode extension (WIP)
+# Ki vscode extension
 
-Work in progress
+Provides support for `ki` lang in vscode
+
+## Features
+
+```
+- Syntax highlighting
+- Auto completion
+- Goto definition
+- Error checking
+- Function argument hints
+```
