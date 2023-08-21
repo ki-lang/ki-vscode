@@ -4,6 +4,7 @@
     "description": "Ki language support",
     "version": "0.0.1",
     "publisher": "ki-lang",
+    "icon": "images/ki-logo.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/ki-lang/ki-vscode"
