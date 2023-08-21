@@ -17,33 +17,42 @@ export function activate(context: vs.ExtensionContext) {
 	let outputChannel = vs.window.createOutputChannel("Ki Language Server");
 
 	const cmd = "ki";
-	const serverOptions: ServerOptions = {
-		run: {
-			command: cmd,
-			transport: TransportKind.stdio,
-			args: ['ls', 'start']
-		},
-		debug: {
-			command: cmd,
-			transport: TransportKind.stdio,
-			args: ['ls', 'start']
-		}
-	};
 
-	const clientOptions: LanguageClientOptions = {
-		documentSelector: [{ scheme: 'file', language: 'ki' }],
-		outputChannel: outputChannel,
-		traceOutputChannel: outputChannel
-	};
+	var commandExists = require('command-exists');
+	commandExists(cmd).then(function () {
+		// console.log("# Start ki language server");
 
-	client = new LanguageClient(
-		'kiLanguageServer',
-		'Ki Language Server',
-		serverOptions,
-		clientOptions
-	);
+		const serverOptions: ServerOptions = {
+			run: {
+				command: cmd,
+				transport: TransportKind.stdio,
+				args: ['ls', 'start']
+			},
+			debug: {
+				command: cmd,
+				transport: TransportKind.stdio,
+				args: ['ls', 'start']
+			}
+		};
 
-	client.start();
+		const clientOptions: LanguageClientOptions = {
+			documentSelector: [{ scheme: 'file', language: 'ki' }],
+			outputChannel: outputChannel,
+			traceOutputChannel: outputChannel
+		};
+
+		client = new LanguageClient(
+			'kiLanguageServer',
+			'Ki Language Server',
+			serverOptions,
+			clientOptions
+		);
+
+		client.start();
+
+	}).catch(function () {
+		vs.window.showErrorMessage("ki not installed or not added to the PATH environment variable");
+	});
 
 	// context.subscriptions.push(vs.languages.registerDefinitionProvider({ scheme: "file", language: "ki", pattern: "**/*.{ki,kh}" }, {
 	// 	provideDefinition(document, position, token): vs.ProviderResult<vs.Definition> {
